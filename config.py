@@ -23,6 +23,7 @@ class Commerce(Context):
     def __init__(self, banco: str, servidor: str, database: str, uid: str, pwd: str):
         super().__init__(banco, servidor, database, uid, pwd)
 
+
 class Adventure(Context):
     def __init__(self, banco: str, servidor: str, database: str, uid: str, pwd: str):
         super().__init__(banco, servidor, database, uid, pwd)

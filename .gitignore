@@ -262,4 +262,5 @@ cython_debug/
 
 # Pastas de manipulação de dados
 dados_adventure/
+dados_commerce/
 dados_zip/
