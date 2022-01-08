@@ -259,3 +259,7 @@ dmypy.json
 cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/jupyternotebooks,pycharm,python
+
+# Pastas de manipulação de dados
+dados_adventure/
+dados_zip/
