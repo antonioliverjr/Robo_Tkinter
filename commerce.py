@@ -53,6 +53,7 @@ class Db_Commerce(Db_operacoes):
     def copy_arquivos(self) -> bool:
         try:
             arquivo_zip = self.arquivo_zip()
+            self.limpar_pastas(self.PASTA_COM)
             zip_destino = os.path.join(self.PASTA_COM, arquivo_zip)
             for file in os.listdir(self.PASTA_ZIP):
                 if file == arquivo_zip:
