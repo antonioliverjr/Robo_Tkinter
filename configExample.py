@@ -15,8 +15,8 @@ class Context(ABC):
 class Ms_sql(enum.Enum):
     BANCO = "ODBC Driver 17 for SQL Server"
     SERVIDOR = "localhost\\SQLEXPRESS"
-    USER = "project"
-    PASSWORD = "Jrdbsql"
+    USER = ""
+    PASSWORD = ""
 
 
 class Commerce(Context):

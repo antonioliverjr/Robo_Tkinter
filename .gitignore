@@ -264,3 +264,6 @@ cython_debug/
 dados_adventure/
 dados_commerce/
 dados_zip/
+
+# Arquivo de Configuração local
+config.py
