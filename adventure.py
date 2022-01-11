@@ -1,4 +1,3 @@
-from pyodbc import dataSources
 from config import *
 import os
 from zipfile import ZipFile

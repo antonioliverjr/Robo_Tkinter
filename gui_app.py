@@ -4,8 +4,8 @@ from config import Color
 
 
 class GuiApp():
-    def __init__(self):
-        self.main = Tk()
+    def __init__(self, main):
+        self.main = main
         self.main['bg'] = Color.BACKGROUND_BG.value
         self.main.geometry("550x330+200+200")
         self.main.resizable(False, False)

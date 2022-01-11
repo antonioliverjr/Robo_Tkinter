@@ -1,4 +1,4 @@
-from tkinter import StringVar
+from tkinter import Tk, StringVar
 from config import Commerce
 from gui_app import GuiApp, N, S, E, W
 from commerce import Db_Commerce
@@ -42,7 +42,8 @@ def main():
             importacao.set(f'{data_log()}')
 
 
-    menu = GuiApp()
+    menu = Tk()
+    menu.gui = GuiApp(menu)
     result = []
     resultados = StringVar(value=result)
 
@@ -55,11 +56,11 @@ def main():
 
     registros = StringVar()
     importacao = StringVar()
-    menu.total_registros['textvariable'] = registros
-    menu.data_importacao['textvariable'] = importacao
-    menu.iniciar['command'] = lambda: start(add_result, registros, importacao)
-    menu.console['listvariable'] = resultados
-    menu.main.mainloop()
+    menu.gui.total_registros['textvariable'] = registros
+    menu.gui.data_importacao['textvariable'] = importacao
+    menu.gui.iniciar['command'] = lambda: start(add_result, registros, importacao)
+    menu.gui.console['listvariable'] = resultados
+    menu.mainloop()
 
 if __name__ == '__main__':
     main()
