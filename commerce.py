@@ -1,4 +1,3 @@
-from datetime import date
 from config import *
 from zipfile import ZipFile
 import shutil
@@ -6,7 +5,7 @@ import shutil
 
 class Db_Commerce(Db_operacoes):
     PASTA_COM = 'dados_commerce/'
-    PASTA_ZIP = 'dados_zip/'
+    PASTA_ZIP_COM = 'dados_zip/'
 
     def __init__(self):
         self.__context = Commerce(Ms_sql.BANCO.value, Ms_sql.SERVIDOR.value, "COMMERCE", Ms_sql.USER.value, Ms_sql.PASSWORD.value)
@@ -55,9 +54,9 @@ class Db_Commerce(Db_operacoes):
             arquivo_zip = self.arquivo_zip()
             self.limpar_pastas(self.PASTA_COM)
             zip_destino = os.path.join(self.PASTA_COM, arquivo_zip)
-            for file in os.listdir(self.PASTA_ZIP):
+            for file in os.listdir(self.PASTA_ZIP_COM):
                 if file == arquivo_zip:
-                    shutil.copy(os.path.join(self.PASTA_ZIP, arquivo_zip),
+                    shutil.copy(os.path.join(self.PASTA_ZIP_COM, arquivo_zip),
                     zip_destino)
 
                     with ZipFile(zip_destino, 'r') as zip:
