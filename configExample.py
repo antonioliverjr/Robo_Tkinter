@@ -30,14 +30,13 @@ class Adventure(Context):
 
     
 class Db_operacoes(ABC):
-    def data_atual(self):
+    def data_atual(self) -> str:
         return datetime.now().strftime('%Y%m%d')
     
     @abstractmethod
-    def close(self):
-        pass
+    def close(self): pass
 
-    def limpar_pastas(self, path):
+    def limpar_pastas(self, path) -> None:
         date_atual = self.data_atual()
         for root, dirs, files in os.walk(path):
             for file in files:

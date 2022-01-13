@@ -1,6 +1,7 @@
 from config import *
 import os
 from zipfile import ZipFile
+from typing import List
 
 
 class Db_Adventure(Db_operacoes):
@@ -10,17 +11,17 @@ class Db_Adventure(Db_operacoes):
     def __init__(self):
         self.__context = Adventure(Ms_sql.BANCO.value, Ms_sql.SERVIDOR.value, "AdventureWorks2019", Ms_sql.USER.value, Ms_sql.PASSWORD.value)
         self.cursor = self.__context.conn.cursor()
-        self.tabela = []
-        self.arquivo = ''
+        self.tabela: List = []
+        self.arquivo: str = ''
 
-    def close(self):
+    def close(self)-> None:
         self.cursor.close()
         self.__context.conn.close()
 
-    def arquivo_dia(self):
+    def arquivo_dia(self) -> str:
         return f'{self.PASTA_ADV}adventure_product_{self.data_atual()}.txt'
 
-    def arquivo_zip(self):
+    def arquivo_zip(self) -> str:
         return f'adventure_product_{self.data_atual()}.zip'
 
     def consulta(self) -> bool:

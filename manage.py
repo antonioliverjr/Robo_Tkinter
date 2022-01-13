@@ -1,16 +1,17 @@
 from tkinter import Tk, StringVar
-from config import Commerce
 from gui_app import GuiApp, N, S, E, W
 from commerce import Db_Commerce
 from adventure import Db_Adventure
 from datetime import datetime
+from __future__ import annotations
+from typing import List
 
 ''' Execução de JOB para extração e importação de dados '''
 def main():
-    def data_log():
+    def data_log() -> str:
         return datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
-    def start(add_result, registros, importacao):
+    def start(add_result: add_result, registros: StringVar, importacao: StringVar) -> None:
         '''
         Manipulação das classe Adventure e do GUI para adquirir os dados e gerar os arquivos txt e zip...
         '''
@@ -44,10 +45,10 @@ def main():
 
     menu = Tk()
     menu.gui = GuiApp(menu)
-    result = []
+    result: List = []
     resultados = StringVar(value=result)
 
-    def add_result(texto):
+    def add_result(texto) -> None:
        result.append(texto)
        resultados.set(result)
 
