@@ -1,6 +1,8 @@
 from config import *
 from zipfile import ZipFile
 import shutil
+import asyncio
+from typing import Dict
 
 
 class Db_Commerce(Db_operacoes):
@@ -10,19 +12,19 @@ class Db_Commerce(Db_operacoes):
     def __init__(self):
         self.__context = Commerce(Ms_sql.BANCO.value, Ms_sql.SERVIDOR.value, "COMMERCE", Ms_sql.USER.value, Ms_sql.PASSWORD.value)
         self.cursor = self.__context.conn.cursor()
-        self.tabela = {}
+        self.tabela: Dict = {}
 
-    def close(self):
+    def close(self) -> None:
         self.cursor.close()
         self.__context.conn.close()
 
-    def commit(self):
+    def commit(self) -> None:
         self.__context.conn.commit()
 
-    def arquivo_zip(self):
+    def arquivo_zip(self) -> str:
         return f'adventure_product_{self.data_atual()}.zip'
     
-    def arquivo_dia(self):
+    def arquivo_dia(self) -> str:
         return f'{self.PASTA_COM}adventure_product_{self.data_atual()}.txt'
 
     def total_registros(self) -> int:
@@ -38,11 +40,11 @@ class Db_Commerce(Db_operacoes):
 
         return False
 
-    def inserir(self, nome:str, produto_numero:str, level_estoque:int, ponto_reposicao:int,
-    dt_modificacao:str):
+    async def inserir(self, nome:str, produto_numero:str, level_estoque:int, ponto_reposicao:int,
+    dt_modificacao:str) -> bool:
         try:
             sql = 'insert into loja.produtos(nome, produto_numero, level_estoque, ponto_reposicao, dt_modificacao) values(?, ?, ?, ?, ?)'
-            self.cursor.execute(sql, (nome, produto_numero, level_estoque, ponto_reposicao, dt_modificacao))
+            await self.cursor.execute(sql, (nome, produto_numero, level_estoque, ponto_reposicao, dt_modificacao))
             self.commit()
         except Exception as e:
             return e
@@ -89,13 +91,13 @@ class Db_Commerce(Db_operacoes):
             if len(self.tabela) > 0:
                 if self.truncate():
                     for valor in self.tabela:
-                        self.inserir(
+                        asyncio.run(self.inserir(
                             self.tabela[valor]['nome'],
                             self.tabela[valor]['produto_numero'],
                             self.tabela[valor]['level_estoque'],
                             self.tabela[valor]['ponto_reposicao'],
                             self.tabela[valor]['dt_modificacao']
-                        )
+                        ))
             else:
                 raise ValueError("Houve um erro no processamento de dados do arquivo txt!")
 
